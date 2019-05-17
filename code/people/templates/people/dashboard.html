@@ -1,0 +1,21 @@
+{% extends './base.html' %}
+{% load i18n %}
+{% load django_tables2 %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 col-xs-offset-2 col-sm-offset-2 col-md-offset-2 col-lg-offset-2">
+            <h1 class="main-title">{{ title }}</h1>
+            <div class="well">
+                {% if filter %}
+                    <form class="filters" action="" method="get">
+                        {{ filter.form.as_p }}
+                        <input class="submit" type="submit"/>
+                    </form>
+                {% endif %}
+
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+{% endblock content %}
