@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+
+  adminer:
+    image: adminer
+    ports:
+      - 8080:8080
+
+  db:
+    image: postgres:11
+    volumes:
+      - ./data:/data
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=level1
+
+  web:
+    build: .
+    command: tail -f /dev/null
+    volumes:
+      - ./code:/code
+      - ./data:/data
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    environment:
+      NAME_DB: 'level1'
+      USER_DB: 'postgres'
+      PASSWORD_DB: 'postgres'
+      PORT_DB: '5432'
+      HOST_DB: 'db'
+      ALLOWED_HOSTS: '*'
+
