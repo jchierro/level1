@@ -3,6 +3,6 @@ from . import views
 
 
 urlpatterns = [
-    # Auth
+    # Dashboard
     path('', views.PeopleListView.as_view(), name='dashboard'),
 ]
